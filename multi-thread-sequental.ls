@@ -19,7 +19,7 @@ do
     console.log td!, "hello #{i}"
     i := i + 1
     if i is 3
-      op!;return
+      op!;return # break 
     <- sleep 1000ms
     lo(op)
   console.log td!, "heyy"
