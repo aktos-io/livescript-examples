@@ -50,3 +50,55 @@ do
     5517ms : hello 2
     5520ms : heyy
 */
+
+/* Compiled output is: 
+var st, td, sleep, i, a;
+st = new Date().getTime();
+td = function(){
+  return (new Date().getTime() - st) + "ms :";
+};
+sleep = function(ms, f){
+  setTimeout(f, ms);
+};
+i = 3;
+console.log(td(), "start");
+(function lo(op){
+  console.log(td(), "hi " + i);
+  i = i - 1;
+  if (i === 0) {
+    op();
+    return;
+  }
+  return sleep(1000, function(){
+    return lo(op);
+  });
+})(function(){
+  return sleep(1500, function(){
+    return function lo(op){
+      console.log(td(), "hello " + i);
+      i = i + 1;
+      if (i === 3) {
+        op();
+        return;
+      }
+      return sleep(1000, function(){
+        return lo(op);
+      });
+    }(function(){
+      return console.log(td(), "heyy");
+    });
+  });
+});
+a = 5;
+(function lo(op){
+  console.log(td(), "this runs in parallel!", a);
+  a = a - 1;
+  if (a === 0) {
+    op();
+    return;
+  }
+  return sleep(500, function(){
+    return lo(op);
+  });
+})(function(){});
+*/
