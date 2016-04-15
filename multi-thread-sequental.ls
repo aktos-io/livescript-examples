@@ -11,7 +11,7 @@ do
     console.log td!, "hi #{i}"
     i := i - 1
     if i is 0
-      op!;return
+      op!;return # break 
     <- sleep 1000ms
     lo(op)
   <- sleep 1500ms
@@ -30,7 +30,7 @@ do
     console.log td!, "this runs in parallel!", a
     a := a - 1 
     if a is 0
-      op!;return 
+      op!;return # break 
     <- sleep 500ms
     lo(op)
     
