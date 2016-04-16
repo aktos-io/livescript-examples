@@ -6,8 +6,8 @@ td = -> (new Date! .get-time! - st) + "ms :"
 
 # utility functions 
 sleep = (ms, f) !-> set-timeout f, ms 
-yield-from = (virtual-pin, callback) !-> set-watch callback, virtual-pin, {edge: \rising, repeat: yes}
-yield-to = (virtual-pin) !-> [digital-write virtual-pin, state for state in [off, on]]
+wait-for = (virtual-pin, callback) !-> set-watch callback, virtual-pin, {edge: \rising, repeat: yes}
+go = (virtual-pin) !-> [digital-write virtual-pin, state for state in [off, on]]
 
 # application
 do
@@ -16,7 +16,7 @@ do
   <- :lo(op) ->
     console.log td!, "hi #{i}"
     i := i - 1
-    <- yield-from 14
+    <- wait-for 14
     if i is 0
       op!;return # break 
     <- sleep 1000ms
@@ -36,7 +36,7 @@ do
   <- :lo(op) -> 
     console.log td!, "this runs in parallel!", a
     a := a - 1 
-    yield-to 14
+    go 14
     if a is 0
       op!;return # break 
     <- sleep 500ms
