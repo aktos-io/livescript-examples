@@ -43,7 +43,7 @@ do
     console.log td!, "start"
     <- :lo(op) ->
         console.log td!, "hi #{i}"
-        i := i - 1
+        i--
         <- wait-for 14
         if i is 0
             op!;return # break
@@ -51,7 +51,7 @@ do
     <- sleep 1500ms
     <- :lo(op) ->
         console.log td!, "hello #{i}"
-        i := i + 1
+        i++
         if i is 3
             op!;return # break
         <- sleep 1000ms
@@ -63,7 +63,7 @@ do
     a = 5
     <- :lo(op) ->
         console.log td!, "this runs in parallel!", a
-        a := a - 1
+        a--
         go 14
         if a is 0
             op!;return # break
