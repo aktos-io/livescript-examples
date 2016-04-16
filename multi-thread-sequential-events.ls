@@ -44,7 +44,7 @@ do
     <- :lo(op) ->
         console.log td!, "hi #{i}"
         i--
-        <- wait-for 14
+        <- wait-for \something
         if i is 0
             op!;return # break
         lo(op)
@@ -64,7 +64,7 @@ do
     <- :lo(op) ->
         console.log td!, "this runs in parallel!", a
         a--
-        go 14
+        go \something
         if a is 0
             op!;return # break
         <- sleep 500ms
