@@ -1,4 +1,5 @@
 # A multi-thread-like, sequential code example
+# with signalling
 
 # for debugging purposes
 st = new Date! .get-time!
@@ -46,7 +47,6 @@ do
         <- wait-for 14
         if i is 0
             op!;return # break
-        <- sleep 1000ms
         lo(op)
     <- sleep 1500ms
     <- :lo(op) ->
@@ -69,3 +69,21 @@ do
             op!;return # break
         <- sleep 500ms
         lo(op)
+
+
+/* output:
+
+0ms : start
+2ms : hi 3
+3ms : this runs in parallel! 5
+4ms : hi 2
+505ms : this runs in parallel! 4
+505ms : hi 1
+1007ms : this runs in parallel! 3
+1508ms : this runs in parallel! 2
+2009ms : this runs in parallel! 1
+2508ms : hello 0
+3510ms : hello 1
+4510ms : hello 2
+4512ms : heyy
+*/
