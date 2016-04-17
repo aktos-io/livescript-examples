@@ -28,7 +28,6 @@ wait-for = (event-id, callback) !->
     ev_ = get-wait-event event-id
     if callback.to-string! not in [..to-string! for ev_.callbacks]
         ev_.callbacks ++= [callback]
-        #console.log "not found, adding callback: ", callback
     ev_.waiting = yes
     run-waiting-event event-id
 
@@ -60,7 +59,7 @@ do
     console.log td!, "heyy"
 
 do
-    a = 5
+    a = 8
     <- :lo(op) ->
         console.log td!, "this runs in parallel!", a
         a--
@@ -75,15 +74,19 @@ do
 
 0ms : start
 2ms : hi 3
-3ms : this runs in parallel! 5
-4ms : hi 2
-505ms : this runs in parallel! 4
+3ms : this runs in parallel! 8
+3ms : hi 2
+505ms : this runs in parallel! 7
 505ms : hi 1
-1007ms : this runs in parallel! 3
-1508ms : this runs in parallel! 2
-2009ms : this runs in parallel! 1
-2508ms : hello 0
-3510ms : hello 1
-4510ms : hello 2
-4512ms : heyy
+1007ms : this runs in parallel! 6
+1508ms : this runs in parallel! 5
+2009ms : this runs in parallel! 4
+2509ms : hello 0
+2509ms : this runs in parallel! 3
+3010ms : this runs in parallel! 2
+3509ms : hello 1
+3510ms : this runs in parallel! 1
+4511ms : hello 2
+4511ms : heyy
+
 */
