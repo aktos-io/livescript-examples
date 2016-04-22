@@ -45,14 +45,14 @@ do
         i--
         <- wait-for \something
         if i is 0
-            op!;return # break
+            return op! # break
         lo(op)
     <- sleep 1500ms
     <- :lo(op) ->
         console.log td!, "hello #{i}"
         i++
         if i is 3
-            op!;return # break
+            return op! # break
         <- sleep 1000ms
         lo(op)
     <- sleep 0
@@ -65,7 +65,7 @@ do
         a--
         go \something
         if a is 0
-            op!;return # break
+            return op! # break
         <- sleep 500ms
         lo(op)
 

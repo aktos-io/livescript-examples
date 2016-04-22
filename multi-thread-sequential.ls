@@ -1,8 +1,8 @@
-# A multi-thread-like, sequential code example 
+# A multi-thread-like, sequential code example
 
 st = new Date! .get-time!
 td = -> (new Date! .get-time! - st) + "ms :"
-sleep = (ms, f) !-> set-timeout f, ms 
+sleep = (ms, f) !-> set-timeout f, ms
 
 do
   i = 3
@@ -11,31 +11,31 @@ do
     console.log td!, "hi #{i}"
     i := i - 1
     if i is 0
-      op!;return # break 
+      return op! # break
     <- sleep 1000ms
     lo(op)
   <- sleep 1500ms
-  <- :lo(op) -> 
+  <- :lo(op) ->
     console.log td!, "hello #{i}"
     i := i + 1
     if i is 3
-      op!;return # break 
+      return op! # break
     <- sleep 1000ms
     lo(op)
   console.log td!, "heyy"
 
-do 
+do
   a = 5
-  <- :lo(op) -> 
+  <- :lo(op) ->
     console.log td!, "this runs in parallel!", a
-    a := a - 1 
+    a := a - 1
     if a is 0
-      op!;return # break 
+      return op! # break 
     <- sleep 500ms
     lo(op)
-    
-    
-/* Output: 
+
+
+/* Output:
     0ms : start
     2ms : hi 3
     4ms : this runs in parallel! 5
@@ -51,7 +51,7 @@ do
     5520ms : heyy
 */
 
-/* Compiled output is: 
+/* Compiled output is:
 var st, td, sleep, i, a;
 st = new Date().getTime();
 td = function(){
