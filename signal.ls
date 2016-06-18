@@ -2,6 +2,12 @@ export sleep = (ms, f) -> set-timeout f, ms
 export after = sleep
 clear-timer = (x) -> clear-interval x
 
+# for debugging purposes
+st = new Date! .get-time!
+export debug-log = (...print) ->
+    console.log (new Date! .get-time! - st) + "ms : " + print.join(' ')
+
+
 wait-events = {}
 get-wait-event = (event-id) ->
     ev_ = wait-events[event-id]
@@ -16,8 +22,9 @@ run-waiting-event = (event-id, timer) ->
         ev_.run = no
         ev_.waiting = no
         for callback in ev_.callbacks
+            status = if timer is null then \timed-out else \has-event
             clear-timer timer  # clear timer if set
-            callback!
+            callback status
 
 export wait-for = (event-id, callback) !->
     ev_ = get-wait-event event-id
@@ -32,12 +39,11 @@ export timeout-wait-for = (timeout, event-id, callback) !->
         ev_.callbacks ++= [callback]
     ev_.waiting = yes
     timer = after timeout, ->
-        ev_.waiting = no
-        ev_.run = no
-        callback!
+        ev_.run = yes
+        run-waiting-event event-id, null
     run-waiting-event event-id, timer
 
 export go = (event-id) !->
     ev_ = get-wait-event event-id
     ev_.run = yes
-    run-waiting-event event-id
+    run-waiting-event event-id, "normally-go"

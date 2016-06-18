@@ -1,14 +1,10 @@
 # A multi-thread-like, sequential code example
 # with signalling
-
-# for debugging purposes
-st = new Date! .get-time!
-debug-log = (...print) ->
-    console.log (new Date! .get-time! - st) + "ms :" + print.join(' ')
-
 # utility functions
 require! {
-    "./signal": {wait-for, go, sleep}
+    "./signal": {
+        wait-for, go, sleep, debug-log
+    }
 }
 
 do # greenlet 1
@@ -35,7 +31,7 @@ do # greenlet 1
 do # greenlet 2
     delay = 3000ms
     debug-log "greenlet-2 will start in #{delay}ms second..."
-    <- sleep delay 
+    <- sleep delay
     a = 8
     <- :lo(op) ->
         debug-log "let something go (runs in parallel!)", a
