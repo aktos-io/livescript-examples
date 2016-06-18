@@ -1,6 +1,6 @@
 # Livescript Examples 
 
-signal.ls: 
+## signal.ls: 
 
 * `<- wait-for \my-signal`: pause execution at this point, till someone lets `go \my-signal`
 * `<- go \my-signal`: let go some code who `wait-for \my-signal`
