@@ -5,11 +5,15 @@ require! {
 
 do # application greenlet
     debug-log "started application..."
-    reason <- timeout-wait-for 2000ms, \my-signal
-    debug-log "my data: ", reason
+    <- :lo(op) ->
+        reason <- timeout-wait-for 2000ms, \my-signal
+        debug-log "my data: ", reason
+        lo(op)
 
 
 do # receiver
-    <- sleep 3000ms
-    debug-log "SIMULATING data received!"
-    go \my-signal
+    <- :lo(op) ->
+        <- sleep 1000ms
+        debug-log "SIMULATING data received!"
+        go \my-signal
+        lo(op)

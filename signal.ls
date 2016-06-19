@@ -24,6 +24,7 @@ run-waiting-event = (event-id, timer) ->
         for callback in ev_.callbacks
             status = if timer is null then \timed-out else \has-event
             clear-timer timer  # clear timer if set
+            wait-events[event-id] = void
             callback status
 
 export wait-for = (event-id, callback) !->
