@@ -8,13 +8,8 @@ my-signal = new Signal
 do # application greenlet (consumer)
     <- :lo(op) ->
         err, res <- my-signal.wait 1000ms 
-        err-str = if err 
-            "TIMEOUT OCCURRED! "
-        else 
-            ""
-        debug-log "#{err-str}my data: ", res
+        debug-log "#{if err => "TIMEOUT OCCURRED! " else ""}my data: ", res
         lo(op)
-
 
 do # producer
     i = 0
