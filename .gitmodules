@@ -1,0 +1,3 @@
+[submodule "signal"]
+	path = signal
+	url = https://github.com/ceremcem/signal

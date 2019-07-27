@@ -50,3 +50,25 @@ console.log ''
 console.log 'cca2 is removed: '
 console.log '-'*30
 console.log get-view!
+
+
+/* Output: 
+
+first join: 
+------------------------------
+[ { id: 1, name: 'cca', age: 30 },
+  { id: 2, name: 'can', age: 21 },
+  { id: 3, name: 'me', age: 19 } ]
+
+cca:30 is updated to cca2:32 : 
+------------------------------
+[ { id: 1, name: 'cca2', age: 32 },
+  { id: 2, name: 'can', age: 21 },
+  { id: 3, name: 'me', age: 19 } ]
+
+cca2 is removed: 
+------------------------------
+[ { id: 2, name: 'can', age: 21 },
+  { id: 3, name: 'me', age: 19 } ]
+
+*/
